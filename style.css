@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&family=Roboto:wght@400;500&display=swap');
+
 /* General Styles */
 * {
     box-sizing: border-box;
@@ -10,13 +12,19 @@ html {
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Roboto', sans-serif; /* Updated default body font */
     background-color: #121212; /* Base dark background */
     color: #e0e0e0; /* Light text */
     margin: 0; /* Reset default margin */
     display: flex;
     flex-direction: column;
     min-height: 100vh; /* Ensure body always at least fills viewport */
+}
+
+/* Apply Raleway to all headings */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700; /* Default bold for headings */
 }
 
 /* Vanta Background Container for index.html */
@@ -33,9 +41,10 @@ body {
 /* Content wrapper for index.html (scrolls over Vanta) */
 body:not(.job-details-page) #content-wrapper {
     position: relative;
-    z-index: 2;
+    z-index: 2; /* Above Vanta, below Header */
     overflow-y: auto;
     height: 100vh; /* Full height for scrolling area */
+    padding-top: 60px; /* ADDED: Space for fixed header (adjust if header height changes) */
     display: flex;
     flex-direction: column;
 }
@@ -68,8 +77,9 @@ header {
 }
 
 header h1 {
+    font-family: 'Raleway', sans-serif; /* Header site title */
     font-size: 1.2em;
-    font-weight: normal;
+    font-weight: 700; /* Bolder for site title */
 }
 
 /* Hero Section - index.html specific */
@@ -81,22 +91,25 @@ body:not(.job-details-page) .hero {
     text-align: center;
     padding: 2em;
     background-color: transparent;
-    margin-top: 60px; /* Adjust based on header height */
-    flex-grow: 1;
+    /* margin-top: 60px; REMOVED: Moved to padding-top of content-wrapper */
+    min-height: calc(100vh - 60px); /* ADDED: Ensure hero section itself fills viewport height minus header */
+    /* flex-grow: 1; Consider removing or ensure it doesn't conflict with min-height */
     position: relative;
-    z-index: 3;
+    z-index: 3; /* This z-index is fine relative to #content-wrapper's children */
 }
 
 body:not(.job-details-page) .hero h2 {
-    font-family: 'Arial Black', Gadget, sans-serif;
-    font-size: 3.5em;
+    /* font-family: 'Arial Black', Gadget, sans-serif; */ /* Replaced by Raleway */
+    font-size: 3.5em; /* Keep existing size */
     margin-bottom: 0.25em;
     color: #ffffff;
+    /* font-weight: 700; already set by h1-h6 rule */
 }
 
 body:not(.job-details-page) .hero p {
     font-size: 1.2em;
     color: #b0b0b0;
+    font-weight: 400; /* Regular Roboto for hero tagline */
 }
 
 /* Waitlist Section - index.html specific */
@@ -108,6 +121,13 @@ body:not(.job-details-page) .waitlist {
     z-index: 3;
 }
 
+/* Assuming .waitlist contains a heading like h3 for "Join the Waitlist" */
+body:not(.job-details-page) .waitlist h3 {
+    font-family: 'Raleway', sans-serif;
+    margin-bottom: 1em; /* Add some space below if there's a title */
+}
+
+
 body:not(.job-details-page) .waitlist input[type="email"] {
     padding: 0.8em 1em;
     margin-right: 0.5em;
@@ -115,6 +135,7 @@ body:not(.job-details-page) .waitlist input[type="email"] {
     border-radius: 5px;
     background-color: #2c2c2c;
     color: #e0e0e0;
+    font-family: 'Roboto', sans-serif; /* Ensure input uses body font */
     font-size: 1em;
     width: 250px;
 }
@@ -126,6 +147,8 @@ body:not(.job-details-page) .waitlist button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-family: 'Roboto', sans-serif; /* Ensure button uses body font, or Raleway if preferred */
+    font-weight: 500; /* Medium weight for button text */
     font-size: 1em;
     transition: background-color 0.3s ease;
 }
@@ -143,30 +166,32 @@ body:not(.job-details-page) .job-vacancies {
     min-height: 300px;
     position: relative;
     z-index: 3;
-    display: flex; /* Use flex to center content */
+    display: flex;
     flex-direction: column;
-    align-items: center; /* Center job-vacancies heading and tiles container */
+    align-items: center;
+    /* min-height: auto; Ensure it doesn't try to be 100vh as well */
 }
 
-body:not(.job-details-page) .job-vacancies h3 {
-    font-size: 2em; /* Made heading slightly larger */
-    color: #e0e0e0; /* Brighter for better visibility */
-    margin-bottom: 1.5em; /* More space before tiles */
+body:not(.job-details-page) .job-vacancies h3 { /* "Join Our Team" */
+    font-size: 2em;
+    color: #e0e0e0;
+    margin-bottom: 1.5em;
     text-align: center;
+    font-family: 'Raleway', sans-serif; /* Explicitly Raleway */
 }
 
 /* Job Tiles Styling - index.html */
 .job-tiles-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
-    gap: 1.5em; /* Space between tiles */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5em;
     width: 100%;
-    max-width: 1000px; /* Max width for the tiles container */
+    max-width: 1000px;
     padding: 1em;
 }
 
 .job-tile {
-    background-color: #1e1e1e; /* Slightly lighter than body, darker than job details page */
+    background-color: #1e1e1e;
     padding: 1.5em;
     border-radius: 8px;
     border: 1px solid #2a2a2a;
@@ -181,21 +206,25 @@ body:not(.job-details-page) .job-vacancies h3 {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
 }
 
-.job-tile h4 {
+.job-tile h4 { /* Tile Job Title */
     font-size: 1.4em;
-    color: #00aaff; /* A bright blue for tile titles */
+    color: #00aaff;
     margin-bottom: 0.5em;
+    font-family: 'Raleway', sans-serif; /* Explicitly Raleway */
+    font-weight: 700;
 }
 
-.job-tile p {
+.job-tile p { /* Tile description */
+    font-family: 'Roboto', sans-serif;
     font-size: 0.95em;
     color: #b0b0b0;
     line-height: 1.6;
-    flex-grow: 1; /* Pushes link to bottom */
+    flex-grow: 1;
     margin-bottom: 1em;
+    font-weight: 400;
 }
 
-.job-tile .job-tile-link {
+.job-tile .job-tile-link { /* Tile "Learn More" button */
     display: inline-block;
     background-color: #007bff;
     color: #ffffff;
@@ -203,9 +232,10 @@ body:not(.job-details-page) .job-vacancies h3 {
     border-radius: 5px;
     text-decoration: none;
     text-align: center;
-    font-weight: bold;
+    font-family: 'Roboto', sans-serif; /* Or Raleway for consistency with other buttons */
+    font-weight: 500;
     transition: background-color 0.3s ease;
-    align-self: flex-start; /* Align button to the start of the flex item (bottom left) */
+    align-self: flex-start;
 }
 
 .job-tile .job-tile-link:hover {
@@ -216,51 +246,59 @@ body:not(.job-details-page) .job-vacancies h3 {
 /* === Job Description Page Styles === */
 .job-detail-container {
     max-width: 800px;
-    margin: 2em auto; /* Centered with space */
+    margin: 2em auto;
     padding: 2em;
-    background-color: rgba(26, 26, 26, 0.85); /* Dark, slightly opaque background */
+    background-color: rgba(26, 26, 26, 0.85);
     border-radius: 8px;
-    color: #e0e0e0; /* Light text for readability */
-    position: relative; /* For z-index stacking if ever needed */
-    z-index: 5; /* Ensure it's above body background stuff if any */
+    color: #e0e0e0;
+    position: relative;
+    z-index: 5;
 }
 
-.job-detail-container h1 { /* Job Title */
-    font-family: 'Arial Black', Gadget, sans-serif; /* Similar to hero title */
+.job-detail-container h1 { /* Job Page - Main Job Title */
+    /* font-family: 'Arial Black', Gadget, sans-serif; */ /* Replaced by Raleway */
     font-size: 2.8em;
     margin-bottom: 0.25em;
-    color: #0099ff; /* A distinct blue for job titles */
+    color: #0099ff;
+    font-family: 'Raleway', sans-serif; /* Explicitly Raleway */
+    font-weight: 700;
 }
 
 .job-detail-container .job-meta {
     margin-bottom: 2em;
 }
 
-.job-detail-container .job-meta p {
+.job-detail-container .job-meta p { /* Location, Department */
+    font-family: 'Roboto', sans-serif;
     margin-bottom: 0.3em;
     font-size: 0.95em;
     color: #b0b0b0;
+    font-weight: 400;
 }
 
-.job-detail-container h3 { /* Section Headings */
+.job-detail-container h3 { /* Job Page - Section Headings */
     font-size: 1.6em;
-    color: #00acc1; /* Teal accent for section heads */
+    color: #00acc1;
     margin-top: 1.8em;
     margin-bottom: 0.6em;
     border-bottom: 1px solid #333;
     padding-bottom: 0.3em;
+    font-family: 'Raleway', sans-serif; /* Explicitly Raleway */
+    font-weight: 700;
 }
 
 .job-detail-container p,
-.job-detail-container ul li {
+.job-detail-container ul li { /* Job Page - Body text and list items */
+    font-family: 'Roboto', sans-serif;
     line-height: 1.7;
     font-size: 1em;
     color: #c0c0c0;
+    font-weight: 400;
 }
 
 .job-detail-container ul {
-    list-style-type: disc; /* Standard bullets */
-    padding-left: 20px; /* Indentation for bullets */
+    list-style-type: disc;
+    padding-left: 20px;
     margin-bottom: 1em;
 }
 
@@ -268,7 +306,7 @@ body:not(.job-details-page) .job-vacancies h3 {
     margin-bottom: 0.5em;
 }
 
-.job-detail-container .back-link {
+.job-detail-container .back-link { /* Job Page - "Back to Careers" button */
     display: inline-block;
     margin-top: 2.5em;
     padding: 0.7em 1.2em;
@@ -276,6 +314,8 @@ body:not(.job-details-page) .job-vacancies h3 {
     color: #ffffff;
     text-decoration: none;
     border-radius: 5px;
+    font-family: 'Roboto', sans-serif; /* Or Raleway */
+    font-weight: 500;
     font-size: 1em;
     transition: background-color 0.3s ease;
 }

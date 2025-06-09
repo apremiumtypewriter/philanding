@@ -19,9 +19,33 @@ Phi Browser is an everyday browser that opens the door to every possibility in A
 
 ## Viewing Locally
 
+To view the website locally and avoid potential issues with browser security restrictions when loading files directly (using the `file://` protocol), it's recommended to use a simple local HTTP server.
+
 1.  Clone this repository.
-2.  Open the `index.html` file in your web browser.
-3.  Navigate to job pages through the links on the main page.
+2.  Navigate to the root directory of the cloned repository in your terminal.
+3.  Start a local HTTP server. Here are a couple of common ways using Python:
+
+    *   **For Python 3:**
+        ```bash
+        python3 -m http.server
+        ```
+        Or, if you know the specific port you want to use (e.g., 8000):
+        ```bash
+        python3 -m http.server 8000
+        ```
+
+    *   **For Python 2 (if Python 3 is not available):**
+        ```bash
+        python -m SimpleHTTPServer
+        ```
+        Or with a specific port:
+        ```bash
+        python -m SimpleHTTPServer 8000
+        ```
+
+4.  Once the server is running, it will typically print a message like `Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...`.
+5.  Open your web browser and go to `http://localhost:8000` (or the port number shown by the server).
+6.  You should see the `index.html` page. You can navigate to job pages through the links on the main page.
 
 ## Deployment (`deploy.sh`)
 
