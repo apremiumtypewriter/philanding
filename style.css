@@ -1,0 +1,410 @@
+/* General Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #121212; /* Base dark background */
+    color: #e0e0e0; /* Light text */
+    margin: 0; /* Reset default margin */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure body always at least fills viewport */
+}
+
+/* Vanta Background Container for index.html */
+#vanta-bg-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 0; /* Behind all content */
+    overflow: hidden; /* Just in case Vanta tries to overflow */
+}
+
+/* Content wrapper for index.html (scrolls over Vanta) */
+body:not(.job-details-page) #content-wrapper {
+    position: relative;
+    z-index: 2;
+    overflow-y: auto;
+    height: 100vh; /* Full height for scrolling area */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Specific adjustments for job pages */
+.job-details-page {
+    /* Body on job pages can scroll normally */
+    overflow-y: auto;
+    height: auto;
+}
+
+.job-details-page #content-wrapper {
+    padding-top: 60px; /* Account for fixed header */
+    height: auto; /* Allow content to define height */
+    min-height: calc(100vh - 60px); /* Ensure footer (if any) is pushed down */
+    overflow-y: visible; /* Content wrapper on job pages shouldn't scroll independently */
+}
+
+
+/* Header - Common for all pages */
+header {
+    background-color: rgba(30, 30, 30, 0.9); /* Slightly more opaque for job pages */
+    padding: 1em 2em;
+    text-align: left;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100; /* Ensure header is always on top */
+}
+
+header h1 {
+    font-size: 1.2em;
+    font-weight: normal;
+}
+
+/* Hero Section - index.html specific */
+body:not(.job-details-page) .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2em;
+    background-color: transparent;
+    margin-top: 60px; /* Adjust based on header height */
+    flex-grow: 1;
+    position: relative;
+    z-index: 3;
+}
+
+body:not(.job-details-page) .hero h2 {
+    font-family: 'Arial Black', Gadget, sans-serif;
+    font-size: 3.5em;
+    margin-bottom: 0.25em;
+    color: #ffffff;
+}
+
+body:not(.job-details-page) .hero p {
+    font-size: 1.2em;
+    color: #b0b0b0;
+}
+
+/* Waitlist Section - index.html specific */
+body:not(.job-details-page) .waitlist {
+    text-align: center;
+    padding: 3em 2em;
+    background-color: transparent;
+    position: relative;
+    z-index: 3;
+}
+
+body:not(.job-details-page) .waitlist input[type="email"] {
+    padding: 0.8em 1em;
+    margin-right: 0.5em;
+    border: 1px solid #333;
+    border-radius: 5px;
+    background-color: #2c2c2c;
+    color: #e0e0e0;
+    font-size: 1em;
+    width: 250px;
+}
+
+body:not(.job-details-page) .waitlist button {
+    padding: 0.8em 1.5em;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+body:not(.job-details-page) .waitlist button:hover {
+    background-color: #0056b3;
+}
+
+/* Job Vacancies Section - index.html specific */
+body:not(.job-details-page) .job-vacancies {
+    padding: 4em 2em;
+    text-align: center;
+    border-top: 1px dashed #333;
+    background-color: transparent;
+    min-height: 300px;
+    position: relative;
+    z-index: 3;
+    display: flex; /* Use flex to center content */
+    flex-direction: column;
+    align-items: center; /* Center job-vacancies heading and tiles container */
+}
+
+body:not(.job-details-page) .job-vacancies h3 {
+    font-size: 2em; /* Made heading slightly larger */
+    color: #e0e0e0; /* Brighter for better visibility */
+    margin-bottom: 1.5em; /* More space before tiles */
+    text-align: center;
+}
+
+/* Job Tiles Styling - index.html */
+.job-tiles-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 1.5em; /* Space between tiles */
+    width: 100%;
+    max-width: 1000px; /* Max width for the tiles container */
+    padding: 1em;
+}
+
+.job-tile {
+    background-color: #1e1e1e; /* Slightly lighter than body, darker than job details page */
+    padding: 1.5em;
+    border-radius: 8px;
+    border: 1px solid #2a2a2a;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.job-tile:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+}
+
+.job-tile h4 {
+    font-size: 1.4em;
+    color: #00aaff; /* A bright blue for tile titles */
+    margin-bottom: 0.5em;
+}
+
+.job-tile p {
+    font-size: 0.95em;
+    color: #b0b0b0;
+    line-height: 1.6;
+    flex-grow: 1; /* Pushes link to bottom */
+    margin-bottom: 1em;
+}
+
+.job-tile .job-tile-link {
+    display: inline-block;
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 0.6em 1em;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    align-self: flex-start; /* Align button to the start of the flex item (bottom left) */
+}
+
+.job-tile .job-tile-link:hover {
+    background-color: #0056b3;
+}
+
+
+/* === Job Description Page Styles === */
+.job-detail-container {
+    max-width: 800px;
+    margin: 2em auto; /* Centered with space */
+    padding: 2em;
+    background-color: rgba(26, 26, 26, 0.85); /* Dark, slightly opaque background */
+    border-radius: 8px;
+    color: #e0e0e0; /* Light text for readability */
+    position: relative; /* For z-index stacking if ever needed */
+    z-index: 5; /* Ensure it's above body background stuff if any */
+}
+
+.job-detail-container h1 { /* Job Title */
+    font-family: 'Arial Black', Gadget, sans-serif; /* Similar to hero title */
+    font-size: 2.8em;
+    margin-bottom: 0.25em;
+    color: #0099ff; /* A distinct blue for job titles */
+}
+
+.job-detail-container .job-meta {
+    margin-bottom: 2em;
+}
+
+.job-detail-container .job-meta p {
+    margin-bottom: 0.3em;
+    font-size: 0.95em;
+    color: #b0b0b0;
+}
+
+.job-detail-container h3 { /* Section Headings */
+    font-size: 1.6em;
+    color: #00acc1; /* Teal accent for section heads */
+    margin-top: 1.8em;
+    margin-bottom: 0.6em;
+    border-bottom: 1px solid #333;
+    padding-bottom: 0.3em;
+}
+
+.job-detail-container p,
+.job-detail-container ul li {
+    line-height: 1.7;
+    font-size: 1em;
+    color: #c0c0c0;
+}
+
+.job-detail-container ul {
+    list-style-type: disc; /* Standard bullets */
+    padding-left: 20px; /* Indentation for bullets */
+    margin-bottom: 1em;
+}
+
+.job-detail-container ul li {
+    margin-bottom: 0.5em;
+}
+
+.job-detail-container .back-link {
+    display: inline-block;
+    margin-top: 2.5em;
+    padding: 0.7em 1.2em;
+    background-color: #007bff;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.job-detail-container .back-link:hover {
+    background-color: #0056b3;
+}
+
+
+/* Responsive Design */
+
+/* Index Page specific responsive (unchanged for now) */
+@media (max-width: 768px) {
+    body:not(.job-details-page) .hero h2 {
+        font-size: 2.5em;
+    }
+
+    body:not(.job-details-page) .hero p {
+        font-size: 1em;
+    }
+
+    body:not(.job-details-page) .waitlist input[type="email"] {
+        width: 70%;
+        margin-bottom: 0.5em;
+    }
+
+    body:not(.job-details-page) .waitlist button {
+        width: auto;
+        padding: 0.8em 1.2em;
+    }
+
+    /* Common responsive header */
+    header {
+        padding: 0.8em 1em;
+        text-align: center;
+    }
+
+    header h1 {
+        font-size: 1em;
+    }
+
+    body:not(.job-details-page) .hero {
+        margin-top: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    body:not(.job-details-page) .hero h2 {
+        font-size: 2em;
+    }
+
+    body:not(.job-details-page) .hero p {
+        font-size: 0.9em;
+    }
+
+    body:not(.job-details-page) .waitlist input[type="email"] {
+        width: 90%;
+        margin-right: 0;
+    }
+
+    body:not(.job-details-page) .waitlist button {
+        width: 90%;
+        margin-top: 0.5em;
+    }
+
+    body:not(.job-details-page) .job-vacancies {
+        padding: 2em 1em;
+    }
+
+    /* Responsive Job Tiles */
+    .job-tiles-container {
+        grid-template-columns: 1fr; /* Stack tiles on smaller screens */
+        padding: 1em 0.5em; /* Adjust padding for smaller screens */
+    }
+}
+
+/* Job Details Page specific responsive */
+@media (max-width: 768px) {
+    .job-detail-container {
+        margin: 1em;
+        padding: 1.5em;
+    }
+
+    .job-detail-container h1 { /* Job Title */
+        font-size: 2.2em;
+    }
+
+    .job-detail-container h3 { /* Section Headings */
+        font-size: 1.4em;
+    }
+}
+
+@media (max-width: 480px) {
+    .job-detail-container {
+        margin: 0.5em;
+        padding: 1em;
+        border-radius: 0; /* Full width on small screens */
+    }
+
+    .job-detail-container h1 { /* Job Title */
+        font-size: 1.8em;
+    }
+
+    .job-detail-container h3 { /* Section Headings */
+        font-size: 1.2em;
+    }
+
+    .job-detail-container p,
+    .job-detail-container ul li {
+        font-size: 0.95em;
+    }
+
+    .job-detail-container .back-link {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Further tighten job tile appearance on very small screens if needed */
+    .job-tile {
+        padding: 1em;
+    }
+    .job-tile h4 {
+        font-size: 1.2em;
+    }
+    .job-tile p {
+        font-size: 0.9em;
+    }
+    .job-tile .job-tile-link {
+        padding: 0.5em 0.8em;
+        font-size: 0.9em;
+    }
+}
